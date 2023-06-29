@@ -1,0 +1,63 @@
+header {
+    background-color: #003366;
+    padding: 20px;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  h1#logo {
+    font-size: 36px;
+    margin: 0;
+  }
+  
+  /* Estilo del menú de navegación */
+  nav {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  nav ul li a {
+    color: #333333;
+    text-decoration: none;
+    padding: 5px;
+  }
+  
+  /* Estilo del contenido principal */
+  main {
+    padding: 20px;
+  }
+  
+  /* Estilo del pie de página */
+  footer {
+    background-color: #003366;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  /* Estilo del enlace de cierre de sesión */
+  .myDiv {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  .myDiv a {
+    color: #003366;
+    text-decoration: none;
+  }
+  
+  .myDiv a:hover {
+    text-decoration: underline;
+  }

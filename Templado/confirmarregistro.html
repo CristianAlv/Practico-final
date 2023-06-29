@@ -1,42 +1,84 @@
-{% extends "base_templates.html" %}
+{% extends "baseTemplate.html" %}
 {% block title %}Colegio San Miguel{% endblock %}
 {% block content %}
 
 <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #29223b;
-      color: #ffffff;
-      margin: 0;
-      padding: 0;
-    }
-    
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #ffffff;
-      text-align: center;
-    }
-    
-    h2 {
-      font-size: 24px;
-      color: #ffd700;
-      margin-top: 10px;
-    }
-    
-    li {
-      margin-bottom: 10px;
-    }
-    
-    a {
-      color: #ffffff;
-      text-decoration: none;
-    }
-    
-    a:hover {
-      color: #f92aad;
-    }
+/* Estilo del cuerpo */
+  body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 50px;
+  }
+
+  /* Estilo del contenedor */
+  .container {
+    width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Estilo de los títulos */
+  h1, h2 {
+    color: #333;
+  }
+
+  /* Estilo de las etiquetas del formulario */
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  /* Estilo de los select del formulario */
+  select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  /* Estilo de los inputs del formulario */
+  input[type="date"],
+  input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  /* Estilo de la tabla */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  /* Estilo de las celdas de la tabla */
+  td, th {
+    padding: 5px;
+    border: 1px solid #ccc;
+  }
+
+  /* Estilo del botón de enviar */
+  input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #555;
+  }
+
+
 </style>
 
 <title>Colegio San Miguel</title>

@@ -3,81 +3,71 @@
 {% block content %} 
 
 <style>
-  body {
-    font-family: "Times New Roman", Times, serif;
-    background-color: #29223b;
-    color: #ffffff;
-    margin: 0;
-    padding: 0;
-  }
+ /* Estilo del encabezado */
+header {
+  background-color: #003366;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+}
 
-  header {
-    background-color: #6c4f88;
-    padding: 20px;
-    text-align: center;
-  }
+h2 {
+  font-size: 24px;
+  margin: 0;
+}
 
-  h2 {
-    font-size: 36px;
-    color: #ffd700;
-    margin: 0;
-  }
+/* Estilo de la sección */
+section {
+  padding: 20px;
+}
 
-  section {
-    padding: 20px;
-    text-align: center;
-  }
+/* Estilo del menú de navegación */
+nav {
+  background-color: #f1f1f1;
+  padding: 10px;
+}
 
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-  }
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 
-  nav ul li {
-    margin-right: 20px;
-  }
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
 
-  nav ul li a {
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-  }
+nav ul li a {
+  color: #333333;
+  text-decoration: none;
+  padding: 5px;
+}
 
-  nav ul li a:hover {
-    color: #f92aad;
-  }
+/* Estilo del título del sistema */
+h3 {
+  text-align: center;
+  margin-top: 20px;
+}
 
-  h3 {
-    font-size: 24px;
-    text-align: center;
-    margin-top: 20px;
-  }
+/* Estilo del pie de página */
+footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
 
-  footer {
-    background-color: #6c4f88;
-    padding: 10px;
-    text-align: center;
-  }
-
-  p {
-    font-size: 14px;
-    margin: 0;
-    color: #ffffff;
-  }
 </style>
 
 <header>
-  <h2>Colegio San Miguel</h2>
+  <h2>Bienvenido preceptor {{preceptor.nombre}} {{preceptor.apellido}}</h2>
 </header>
 
 <section>
   <nav>
     <ul>
       <li><a href="{{ url_for('registrarAsistencia') }}">Registrar Asistencias</a></li>
+      <li><a href="{{ url_for('obtener_informe') }}">Informe Detallado</a></li>
     </ul>
   </nav> 
 </section>
@@ -85,7 +75,6 @@
 <h3>Sistema Escolar</h3>
 
 <footer>
-  <p>&copy; {{ 2023 }} Colegio San Miguel. Todos los derechos reservados.</p>
 </footer>
 
 {% endblock %}

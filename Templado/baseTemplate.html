@@ -1,71 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <h1 id="logo">Colegio San Miguel</h1>
-    <title>{% block title %}Colegio San Miguel{% endblock %}</title>
-    <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-            }
-            
-            header {
-                background-color: #333;
-                color: #fff;
-                padding: 10px;
-            }
-            
-            nav {
-                background-color: #f5f5f5;
-                padding: 10px;
-            }
-            
-            nav ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-            }
-            
-            nav ul li {
-                display: inline;
-                margin-right: 10px;
-            }
-            
-            main {
-                padding: 20px;
-            }
-            
-            footer {
-                background-color: #333;
-                color: #fff;
-                padding: 10px;
-                text-align: center;
-            }
-            header {
-                background-color: #333;
-                color: #fff;
-                padding: 10px;
-            }
-            
-            #logo {
-                font-size: 24px;
-                font-weight: bold;
-                margin: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('iniciarsesion') }}">Inicio</a></li>
-        </nav>
-        <main>
-            {% block body %}
-            {% endblock %}
-        </main>
-        <footer>
-            &copy; 2023 Colegio San Miguel. Todos los derechos reservados.
-        </footer>
-    </body>
-    </html>
+    <link rel="stylesheet" href="\css\estilo1.css">
+    
+</head>
+<body>
+    <header>
+        <h1 id="logo">Colegio San Miguel</h1>
+    </header>
+    <nav>
+        <ul>
+        </ul>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        &copy; 2023 Colegio San Miguel. Todos los derechos reservados.
+    </footer>
+    <div class="myDiv">
+        <br><br><a href="{{ url_for('inicio') }}">Inicio</a><br><br>
+        <a href="{{ url_for('iniciarsesion') }}">Cerrar Sesión</a>
+    </div>
+</body>
+</html>

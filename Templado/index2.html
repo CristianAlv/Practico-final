@@ -10,78 +10,62 @@
 
  <style>
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  color: #333333;
-  margin: 0;
-  padding: 0;
-}
+  /* Estilo del encabezado */
+  header {
+    background-color: #333;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+  }
 
-header {
-  background-color: #6c4f88;
-  padding: 20px;
-  text-align: center;
-}
+  h2 {
+    font-size: 24px;
+  }
 
-h2 {
-  font-size: 32px;
-  color: #ffffff;
-  margin: 0;
-}
+  /* Estilo de la sección principal */
+  section {
+    margin: 20px;
+    text-align: center;
+  }
 
-section {
-  padding: 20px;
-  text-align: center;
-}
+  h2, h3 {
+    color: #fefdfd;
+  }
 
-footer {
-  background-color: #6c4f88;
-  padding: 10px;
-  text-align: center;
-}
+  /* Estilo del enlace de cierre de sesión */
+  .myDiv {
+    margin-top: 20px;
+  }
 
-p {
-  font-size: 16px;
-  margin: 0;
-  color: #ffffff;
-}
+  a {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
 
-.myDiv {
-  text-align: center;
-  margin-top: 50px;
-}
+  a:hover {
+    background-color: #555;
+  }
 
-.myDiv a {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #6c4f88;
-  color: #ffffff;
-  border-radius: 20px;
-  text-decoration: none;
-  margin-bottom: 10px;
-}
-
-.myDiv a:hover {
-  background-color: #f92aad;
-}
-
-.myDiv a:active {
-  background-color: #ffd700;
-  color: #000000;
-}
+  /* Estilo del pie de página */
+  footer {
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+  }
 
 </style>
 </head>
 <body>
 <header>
- <h2>Colegio San Miguel</h2>
+ <h2>Bienvenido Padre: {{padre.nombre}} {{padre.apellido}}</h2>
 </header>
 <section>
-    <h2>Se ha iniciado sesión correctamente</h2>
-    <h3>Funciones para padre próximamente</h3>
+    <h3>Se ha iniciado sesión correctamente</h3>
+    <h4>Funciones para padre próximamente</h4>
     <div class="myDiv">
-      <br><br><a href="{{ url_for('iniciarsesion') }}">Cerrar Sesión</a><br><br>
   </div>
 </section>
 <footer>

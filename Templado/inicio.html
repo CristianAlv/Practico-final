@@ -1,0 +1,71 @@
+{% extends 'baseTemplate.html' %} 
+{% block title %} Colegio San Miguel {% endblock %} 
+{% block content %} 
+
+
+<style>
+    /* Estilo del encabezado */
+   header {
+     background-color: #003366;
+     padding: 20px;
+     text-align: center;
+     color: #ffffff;
+   }
+   
+   h2 {
+     font-size: 24px;
+     margin: 0;
+   }
+   
+   /* Estilo de la sección */
+   section {
+     padding: 20px;
+   }
+   
+   /* Estilo del menú de navegación */
+   nav {
+     background-color: #f1f1f1;
+     padding: 10px;
+   }
+   
+   nav ul {
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+   }
+   
+   nav ul li {
+     display: inline;
+     margin-right: 10px;
+   }
+   
+   nav ul li a {
+     color: #333333;
+     text-decoration: none;
+     padding: 5px;
+   }
+   
+   /* Estilo del título del sistema */
+   h3 {
+     text-align: center;
+     margin-top: 20px;
+   }
+   
+   /* Estilo del pie de página */
+   footer {
+     background-color: #f1f1f1;
+     padding: 10px;
+     text-align: center;
+   }
+   
+   </style>
+   
+
+   <header>
+    <h2>Bienvenido usuario</h2>
+  </header>
+<body>
+    <a href="{{ url_for('iniciarsesion') }}">Iniciar Sesión nuevamente</a><br>
+</body>
+</html>
+{% endblock %} 

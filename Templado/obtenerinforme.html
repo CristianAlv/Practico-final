@@ -1,0 +1,167 @@
+{% extends "baseTemplate.html" %}
+{% block title %}Colegio San Miguel{% endblock %}
+{% block content %}
+    <style>
+    /* Estilo del contenedor */
+        /* Estilo del contenedor */
+    .container {
+        background-color: #fff;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Estilo de los encabezados */
+    h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    
+    /* Estilo de los formularios y selecciones */
+    form {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+    
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    input[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    /* Estilo de la tabla */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+    
+    /* Estilo del mensaje */
+    p {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    /* Estilo del separador */
+    hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 20px 0;
+    }
+    
+    </style>
+    
+    <div class="container">
+
+        <h2>Informe de las asistencias</h2>
+        <hr/>
+        <form action="{{ request.path }}" method="post">
+            {% if cursos is not none :%}
+                <label for="cursos">Año - Division</label><br>
+                <select id="cursos" name="curso" width="500px">
+                    {% for curso in cursos %}
+                        {% if curso.idpreceptor == preceptor.id %}
+                            <option value="{{ curso.id }}">{{ curso.anio }} - {{ curso.division }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <br> <br>
+                <input class="button1" type="submit" value="Ir al curso">
+            {% else %}
+                {% if informe %}
+                    <h3>Informe detallado del curso: {{ curso_selecc.anio }}° {{ curso_selecc.division }} Division</h3>
+                    <table>
+                        {% for estudiante in informe %}
+                        <tr>
+                            <th>Apellido</th>
+                            <td>{{ estudiante.apellido }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <td>{{ estudiante.nombre }}</td>
+                        </tr>
+                        <tr>
+                            <th>Clases del aula presentes</th>
+                            <td>{{ estudiante.clases_aula_presentes }}</td>
+                        </tr>
+                        <tr>
+                            <th>Clases de educación física presentes</th>
+                            <td>{{ estudiante.clases_edu_fis_presentes }}</td>
+                        </tr>
+                        <tr>
+                            <th>Clases del aula ausentes justificadas</th>
+                            <td>{{ estudiante.clases_aula_aus_justificadas }}</td>
+                        </tr>
+                        <tr>
+                            <th>Clases del aula ausentes injustificadas</th>
+                            <td>{{ estudiante.clases_aula_aus_injustificadas }}</td>
+                        </tr>
+                        <tr>
+                            <th>Clases de educación física justificadas</th>
+                            <td>{{ estudiante.clases_edu_aus_justificadas }}</td>
+                        </tr>
+                        <tr>
+                            <th>Clases de educación física injustificadas</th>
+                            <td>{{ estudiante.clases_edu_aus_injustificadas }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cantidad total de inasistencias</th>
+                            <td>{{ estudiante.total_de_inasistencias }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><hr></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>No existen estudiantes en el curso seleccionado.</p>
+                {% endif %}
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

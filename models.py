@@ -31,6 +31,8 @@ class Estudiante(db.Model):
     idcurso=db.Column(db.Integer, db.ForeignKey('curso.id'))
     idpadre=db.Column(db.Integer, db.ForeignKey('padre.id'))
     asistencias = db.relationship('Asistencia', backref='estudiante', cascade="all, delete-orphan")
+    def __gt__(estudiante1,estudiante2):
+        return (estudiante1.apellido, estudiante1.nombre)>(estudiante2.apellido, estudiante2.nombre)
 
 
 class Curso(db.Model):

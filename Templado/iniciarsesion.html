@@ -1,91 +1,74 @@
 {% extends "baseTemplate.html" %}
-{% block title %}Colegio San Miguel{% endblock %}
+{% block title %}{% endblock %}
 {% block content %}
 <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #29223b;
-      color: #ffffff;
-      margin: 0;
-      padding: 0;
-    }
-    
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    h1 {
-      font-size: 36px;
-      color: #f92aad;
-      text-align: center;
-      margin: 0;
-      margin-bottom: 20px;
-    }
-    
-    h2 {
-      font-size: 24px;
-      color: #ffd700;
-      text-align: center;
-      margin-top: 10px;
-    }
-    
-    hr {
-      border: none;
-      border-top: 1px solid #ffffff;
-      margin-top: 20px;
-    }
-    
-    form {
-      margin-top: 20px;
-    }
-    
-    label {
-      display: block;
-      font-size: 16px;
-      margin-bottom: 10px;
-      color: #ffffff;
-    }
-    
-    input[type="text"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: 5px;
-      border: none;
-      background-color: #6c4f88;
-      color: #ffffff;
-    }
-    
-    input[type="radio"] {
-      margin-right: 5px;
-    }
-    
-    input[type="submit"] {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #6c4f88;
-      color: #ffffff;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-    
-    input[type="submit"]:hover {
-      background-color: #f92aad;
-    }
-    
-    input[type="submit"]:active {
-      background-color: #ffd700;
-      color: #000000;
-    }
+/* Estilo del encabezado */
+h1, h2 {
+  color: #003366;
+  text-align: center;
+}
+
+/* Estilo del formulario */
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+input[type="radio"],
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #003366;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input[type="submit"] {
+  background-color: #003366;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #002244;
+}
+
+/* Estilo del separador horizontal */
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #003366;
+}
+
+/* Estilo del enlace de cierre de sesión */
+a {
+  text-align: right;
+  color: #003366;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
     </style>
-    <title>Colegio San Miguel</title>
     <div class="container">
-        <h1>Colegio San Miguel</h1>
+
         <h2>Iniciar sesión</h2>
         <hr/>
         <form action="{{ url_for('iniciarsesion') }}" method="post">

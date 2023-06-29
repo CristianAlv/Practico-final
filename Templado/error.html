@@ -6,51 +6,45 @@
  <title>Colegio San Miguel</title> 
 
  <style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #29223b;
-  color: #ffffff;
-  margin: 0;
-  padding: 0;
-}
+  /* Estilo del cuerpo */
+  body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 50px;
+  }
 
-h1 {
-  font-size: 36px;
-  color: #f92aad;
-  text-align: center;
-  margin: 0;
-  margin-top: 100px;
-}
+  /* Estilo del encabezado */
+  h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
 
-.myDiv {
-  text-align: center;
-  margin-top: 50px;
-}
+  /* Estilo del contenedor */
+  .myDiv {
+    margin-top: 20px;
+  }
 
-.myDiv a {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #6c4f88;
-  color: #ffffff;
-  border-radius: 20px;
-  text-decoration: none;
-  margin-bottom: 10px;
-}
+  a {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
 
-.myDiv a:hover {
-  background-color: #f92aad;
-}
+  a:hover {
+    background-color: #555;
+  }
 
-.myDiv a:active {
-  background-color: #ffd700;
-  color: #000000;
-}
+
 </style>
 </head>
 <body>
 <h1> {{ error }}</h1>
 <div class="myDiv">
-  <br><br><a href="{{ url_for('iniciar_sesion') }}">Volver a log in</a><br><br>
+  <br><br><a href="{{ url_for('iniciarsesion') }}">Volver a log in</a><br><br>
 </div>
 </body>
 </html>

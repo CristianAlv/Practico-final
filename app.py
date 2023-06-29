@@ -11,7 +11,9 @@ app.config.from_pyfile('config.py')
 from models import db
 from models import Asistencia, Preceptor, Padre, Curso, Estudiante
 
-
+@app.route('/inicio' , methods = ['GET','POST'])
+def inicio():
+    return render_template('inicio.html')
 
 @app.route('/index' , methods = ['GET','POST'])
 def index():
@@ -36,7 +38,7 @@ def iniciarsesion():
                     result = hashlib.md5(c.encode()).hexdigest()
                     flask_session['userid'] = actual.id
                     if (actual.clave == result):
-                        return render_template('index2.html')
+                        return render_template('index2.html',padre = actual)
                     else:
                         return render_template('error.html', error="La contraseña no es valida")
                     
@@ -49,7 +51,7 @@ def iniciarsesion():
                     result = hashlib.md5(c.encode()).hexdigest()
                     flask_session['userid'] = actual.id
                     if (actual.clave == result):
-                        return render_template('index.html')
+                        return render_template('index.html',preceptor = actual)
                     else:
                         return render_template('error.html', error="La contraseña no es valida")
             else:
@@ -59,8 +61,8 @@ def iniciarsesion():
     
 ##FUNCIONALIDAD 2
 
-@app.route('/registrar_asistencia', methods = ['GET', 'POST'])
-def registrar_asistencia():
+@app.route('/registrarAsistencia', methods = ['GET', 'POST'])
+def registrarAsistencia():
         if request.method == 'POST':
             if not flask_session['curso']:
                 curso = request.form['curso']
@@ -86,6 +88,60 @@ def registrar_asistencia():
             preceptoringresado = Preceptor.query.filter_by(id=flask_session['userid']).first()
             cursos=Curso.query.filter_by(idpreceptor=preceptoringresado.id).all()
             return render_template('registrarAsistencia.html', preceptor=preceptoringresado, cursos=cursos)
+
+##Funcionalidad 3
+@app.route('/obtener_informe', methods=['GET', 'POST'])
+def obtener_informe():
+    informe = []
+    if 'userid' in flask_session:
+        id = flask_session['userid']
+        actual = Preceptor.query.get(id)
+        if request.method == 'POST':
+            if not request.form['curso']:
+                return render_template('obtenerinforme.html', cursos=Curso.query.all(), curso_selecc=None, preceptor=actual)
+            else:
+                curso_id = request.form['curso']
+                curso_selecc = Curso.query.get(curso_id)
+                estudiantes = Estudiante.query.filter_by(idcurso=curso_selecc.id).all()
+                estudiantes.sort()
+                for estudiante in estudiantes:
+                    cont = 0
+                    asistencias = Asistencia.query.filter_by(idestudiante=estudiante.id).all()
+                    clases_aula_presentes = sum(1 for asistencia in asistencias if asistencia.asistio=='s' and asistencia.codigoclase == 1)
+                    clases_edu_fis_presentes = sum(1 for asistencia in asistencias if asistencia.asistio=='s' and asistencia.codigoclase == 2)
+                    clases_aula_aus_justificadas = sum(1 for asistencia in asistencias if  asistencia.asistio=='n' and asistencia.justificacion!=None and asistencia.codigoclase == 1)    
+                    clases_aula_aus_injustificadas = sum(1 for asistencia in asistencias if  asistencia.asistio=='n' and asistencia.justificacion==None and asistencia.codigoclase == 1) 
+                    clases_edu_aus_justificadas = sum(1 for asistencia in asistencias if  asistencia.asistio=='n' and asistencia.justificacion!=None and asistencia.codigoclase == 2)    
+                    clases_edu_aus_injustificadas = sum(1 for asistencia in asistencias if  asistencia.asistio=='n' and asistencia.justificacion==None and asistencia.codigoclase == 2)  
+                    for asistencia in asistencias:
+                        if  asistencia.asistio=='n' and asistencia.justificacion!=None and asistencia.codigoclase == 1:
+                            cont+=1
+                        if  asistencia.asistio=='n' and asistencia.justificacion==None and asistencia.codigoclase == 1:
+                            cont+=1
+                        if  asistencia.asistio=='n' and asistencia.justificacion!=None and asistencia.codigoclase == 2:
+                            cont+=0.5
+                        if  asistencia.asistio=='n' and asistencia.justificacion==None and asistencia.codigoclase == 2:
+                            cont+=0.5
+                        
+                    estudiante_info = {
+                    'apellido': estudiante.apellido,
+                    'nombre': estudiante.nombre,
+                    'clases_aula_presentes': clases_aula_presentes,
+                    'clases_edu_fis_presentes': clases_edu_fis_presentes,
+                    'clases_aula_aus_justificadas': clases_aula_aus_justificadas,
+                    'clases_aula_aus_injustificadas':clases_aula_aus_injustificadas,
+                    'clases_edu_aus_justificadas':clases_edu_aus_justificadas,
+                    'clases_edu_aus_injustificadas':clases_edu_aus_injustificadas,
+                    'total_de_inasistencias':cont
+                    }
+
+                    informe.append(estudiante_info)
+
+                return render_template('obtenerinforme.html', cursos=None, curso_selecc=curso_selecc, preceptor=actual,informe=informe)
+        else:
+            return render_template('obtenerinforme.html', cursos=Curso.query.all(), curso_selecc=None, preceptor=actual)
+    else:
+        return render_template('error.html', error='Debe iniciar sesión como preceptor para acceder a esta página.')    
 
 if __name__ == '__main__':
     with app.app_context():
