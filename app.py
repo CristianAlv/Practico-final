@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, date
+
 from flask import Flask, request, render_template, session as flask_session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -67,22 +68,28 @@ def registrarAsistencia():
             if not flask_session['curso']:
                 curso = request.form['curso']
                 flask_session['curso'] = curso
+                
                 selcurso = Curso.query.filter_by(id=curso).first()
                 estudiantes = Estudiante.query.filter_by(idcurso = selcurso.id).order_by(Estudiante.apellido, Estudiante.nombre).all()
-                return render_template('cargarestudiantes.html', estudiantes = estudiantes)
+                return render_template('cargarestudiantes.html', estudiantes = estudiantes, fecha = date.today())
             else:
                 selfecha = request.form['fecha']
                 selclase = int(request.form['clase'])
                 selcurso = Curso.query.filter_by(id=flask_session['curso']).first()
                 estudiantes = Estudiante.query.filter_by(idcurso = selcurso.id).order_by(Estudiante.apellido, Estudiante.nombre).all()
+                
 
                 for estudiante in estudiantes:
-                    asis = request.form.get(f'asistio-{estudiante.id}')
-                    justif = request.form.get(f'justificacion-{estudiante.id}','')
-                    asistencia = Asistencia(fecha=datetime.strptime(selfecha, "%Y-%m-%d").date(), codigoclase=selclase,asistio=asis,justificacion=justif,idestudiante=estudiante.id)
-                    db.session.add(asistencia)
-                db.session.commit()
-                return render_template('confirmarregistro.html')
+                    asistencia = Asistencia.query.filter_by(fecha =selfecha, idestudiante = estudiante.id)
+                    if asistencia == None:
+                        asis = request.form.get(f'asistio-{estudiante.id}')
+                        justif = request.form.get(f'justificacion-{estudiante.id}','')
+                        asistencia = Asistencia(fecha=datetime.strptime(selfecha, "%Y-%m-%d").date(), codigoclase=selclase,asistio=asis,justificacion=justif,idestudiante=estudiante.id)
+                        db.session.add(asistencia)
+                        db.session.commit()
+                        return render_template('error.html', error = "Asistencia guardada con exito")
+                    else:
+                        return render_template('error.html', error = "Asistencia existente en la fecha")
         else:
             flask_session['curso'] = None
             preceptoringresado = Preceptor.query.filter_by(id=flask_session['userid']).first()
@@ -107,6 +114,7 @@ def obtener_informe():
                 for estudiante in estudiantes:
                     cont = 0
                     asistencias = Asistencia.query.filter_by(idestudiante=estudiante.id).all()
+                    
                     clases_aula_presentes = sum(1 for asistencia in asistencias if asistencia.asistio=='s' and asistencia.codigoclase == 1)
                     clases_edu_fis_presentes = sum(1 for asistencia in asistencias if asistencia.asistio=='s' and asistencia.codigoclase == 2)
                     clases_aula_aus_justificadas = sum(1 for asistencia in asistencias if  asistencia.asistio=='n' and asistencia.justificacion!=None and asistencia.codigoclase == 1)    

@@ -90,7 +90,14 @@
     </select><br>
 
     <label for="fecha">Fecha de asistencia</label><br>
-    <input type="date" id="fecha" name="fecha"><br>
+    <input type="date" name="fecha" value="{{ fecha }}" min="2023-01-01" id="fechaInput"><br></br>
+
+    <script>
+      var currentDate = new Date().toISOString().split("T")[0];
+    
+      document.getElementById("fechaInput").setAttribute("max", currentDate);
+    </script>
+    
 
     <table>
         <thead>
